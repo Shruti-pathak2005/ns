@@ -1,0 +1,19 @@
+#include <iostream>
+using namespace std;
+int main() {
+    string text = "HELLO";
+    string key  = "KEYKE";
+    string cipher = "";
+    for(int i = 0; i < text.size(); i++) {
+        char c = ((text[i] - 'A') + (key[i] - 'A')) % 26 + 'A';
+        cipher += c;
+    }
+    cout << "Encrypted: " << cipher << endl;
+    string plain = "";
+    for(int i = 0; i < cipher.size(); i++) {
+        char p = ((cipher[i] - 'A') - (key[i] - 'A') + 26) % 26 + 'A';
+        plain += p;
+    }
+    cout << "Decrypted: " << plain << endl;
+    return 0;
+}
