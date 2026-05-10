@@ -1,0 +1,30 @@
+def xor(a, b):
+    result = ""
+    for i in range(len(a)):
+        if a[i] == b[i]:
+            result += "0"
+        else:
+            result += "1"
+    return result
+def round(right, key):
+    return xor(right, key)
+def encrypt(pt, key, rounds=4):
+    left = pt[:4]
+    right = pt[4:]
+    print("Initial:")
+    print("L0 =", left)
+    print("R0 =", right)
+    for i in range(rounds):
+        f = round(right, key)
+        new_right = xor(left, f)
+        left = right
+        right = new_right
+        print(f"\nRound {i+1}")
+        print("Left  =", left)
+        print("Right =", right)
+    cipher = left + right
+    return cipher
+plaintext = "10010010"
+key = "1110"
+cipher = encrypt(plaintext, key)
+print("\nCiphertext:", cipher)
